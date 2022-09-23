@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_23_190004) do
+ActiveRecord::Schema.define(version: 2022_09_23_190928) do
 
   create_table "countries", force: :cascade do |t|
     t.string "country_name"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2022_09_23_190004) do
     t.string "traveler_name"
     t.integer "passport_number"
     t.integer "from_country_id"
+  end
+
+  create_table "visits", force: :cascade do |t|
+    t.integer "country_id"
+    t.integer "traveler_id"
+    t.string "accomodation_name"
+    t.string "accomodation_type"
+    t.string "address"
+    t.integer "cost_per_night"
   end
 
 end
