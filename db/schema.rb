@@ -10,12 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_23_185552) do
+ActiveRecord::Schema.define(version: 2022_09_23_190004) do
 
   create_table "countries", force: :cascade do |t|
     t.string "country_name"
     t.string "continent"
     t.string "currency"
+  end
+
+  create_table "travelers", force: :cascade do |t|
+    t.string "traveler_name"
+    t.integer "passport_number"
+    t.integer "from_country_id"
   end
 
 end
