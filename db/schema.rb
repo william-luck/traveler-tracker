@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_23_190928) do
+ActiveRecord::Schema.define(version: 2022_09_29_213124) do
 
   create_table "countries", force: :cascade do |t|
     t.string "country_name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2022_09_23_190928) do
 
   create_table "travelers", force: :cascade do |t|
     t.string "traveler_name"
-    t.integer "passport_number"
+    t.string "passport_number"
     t.integer "from_country_id"
   end
 
