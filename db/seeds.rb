@@ -1,3 +1,5 @@
+require 'faker'
+
 puts "🌱 Seeding spices..."
 
 [
@@ -1256,5 +1258,28 @@ puts "🌱 Seeding spices..."
 #       )
 #     end
 #   end
+
+5000.times do 
+    Visit.create(
+        accomodation_name: Faker::Company.name,
+        accomodation_type: ['Hotel', 'Hostel', 'AirBnb', 'Homestay'].sample,
+        address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
+        cost_per_night: rand(10..200),
+        # Random number between 1 and 244
+        country_id: rand(1..244),
+        # Random number between 1 and 1500
+        traveler_id: rand(1..1000) ,
+
+    )
+end
+
+1000.times do
+    Traveler.create(
+        traveler_name: Faker::Name.name,
+        passport_number: "#{rand(1..99)}-#{rand(1..99)}-#{rand(1..99)}" ,
+        # random number between 1 and 244
+        from_country_id: rand(1..244)
+    )
+end
 
 puts "✅ Done seeding!"
