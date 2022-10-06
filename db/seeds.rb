@@ -1230,56 +1230,43 @@ puts "🌱 Seeding spices..."
             currency: country[:currency]
         )
 } 
-    
 
+# Creates 1000 random visits, for the 'day trips' of each traveler
 
-
-
-
-
-
-
-
-# 50.times do
-#     # create a game with random data
-#     game = Game.create(
-#       title: Faker::Game.title,
-#       genre: Faker::Game.genre,
-#       platform: Faker::Game.platform,
-#       price: rand(0..60) # random number between 0 and 60
-#     )
-  
-#     # create between 1 and 5 reviews for each game
-#     rand(1..5).times do
-#       Review.create(
-#         score: rand(1..10),
-#         comment: Faker::Lorem.sentence,
-#         game_id: game.id # use the ID (primary key) of the game as the foreign key
-#       )
-#     end
-#   end
-
-5000.times do 
+1000.times do
     Visit.create(
         accomodation_name: Faker::Company.name,
         accomodation_type: ['Hotel', 'Hostel', 'AirBnb', 'Homestay'].sample,
         address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
         cost_per_night: rand(10..200),
-        # Random number between 1 and 244
         country_id: rand(1..244),
-        # Random number between 1 and 1500
-        traveler_id: rand(1..1000) ,
-
+        traveler_id: rand(1..500)
     )
 end
 
-1000.times do
-    Traveler.create(
+# After some random visit, create a series of visits, ensuring that each traveler has between 3 and 7 visits in five countries.
+
+500.times do 
+    traveler = Traveler.create(
         traveler_name: Faker::Name.name,
         passport_number: "#{rand(100..999)}-#{rand(100..999)}-#{rand(100..999)}" ,
         # random number between 1 and 244
         from_country_id: rand(1..244)
     )
+
+    random = Array[rand(1..244), rand(1..244), rand(1..244), rand(1..244), rand(1..244)]
+    random.each do |element| 
+        rand(3..7).times do 
+            Visit.create(
+                accomodation_name: Faker::Company.name,
+                accomodation_type: ['Hotel', 'Hostel', 'AirBnb', 'Homestay'].sample,
+                address: "#{Faker::Address.street_address}, #{Faker::Address.city}",
+                cost_per_night: rand(10..200),
+                country_id: element,
+                traveler_id: traveler.id
+            )
+        end
+    end
 end
 
 puts "✅ Done seeding!"
