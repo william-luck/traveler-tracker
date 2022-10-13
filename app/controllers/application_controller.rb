@@ -12,9 +12,9 @@ class ApplicationController < Sinatra::Base
     countries.to_json
   end
 
-  get '/travelers/:id' do
+  get '/travelers_in_country/:id' do
     selected_country = Country.find(params[:id])
-    selected_country.travelers.to_json 
+    selected_country.travelers_currently_in_country.to_json
   end
 
   get '/visits/:id' do
@@ -33,6 +33,9 @@ class ApplicationController < Sinatra::Base
 
   # get '/travelers' do
   #   countries =
+
+  # Traveler.countries.last is the country that they are currently in. Get that ID. 
+  # Once we have the country ID, display the visits from the latest country. 
     
 
 end
