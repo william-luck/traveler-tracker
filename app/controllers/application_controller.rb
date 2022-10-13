@@ -31,6 +31,10 @@ class ApplicationController < Sinatra::Base
     Visit.all.to_json
   end
 
+  get '/traveler_count' do
+    Country.travelers_in_country_array.to_json
+  end
+
   # get '/travelers' do
   #   countries =
 
