@@ -36,10 +36,16 @@ class Traveler < ActiveRecord::Base
     end
 
     def count_of_day_trips
-        
+        self.tally_day_full_trips['day_trips']
     end
 
     def count_of_full_trips
+        self.tally_day_full_trips['full_trips']
+    end
+
+    def average_stays_per_country
+        tallied = self.countries.tally
+        ((tallied.values.reduce(:+).to_f)/(tallied.length)).round
     end
 
 
