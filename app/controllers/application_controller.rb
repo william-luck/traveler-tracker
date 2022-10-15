@@ -49,6 +49,12 @@ class ApplicationController < Sinatra::Base
     traveler.to_json
   end
 
+  delete 'traveler/:id' do
+    traveler = Traveler.find(params[:id])
+    traveler.destroy
+    traveler.to_json
+  end
+
   
 
 
