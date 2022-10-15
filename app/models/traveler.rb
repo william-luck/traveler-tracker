@@ -11,6 +11,14 @@ class Traveler < ActiveRecord::Base
         self.countries.uniq.count
     end
 
+    def country_visit_names
+        names = []
+        self.countries.uniq.each do |country| 
+            names << country.country_name
+        end
+        names
+    end
+
     def count_of_stays
         self.visits.count
     end
@@ -79,6 +87,7 @@ class Traveler < ActiveRecord::Base
             name: self.traveler_name,
             passport: self.passport_number,
             total_countries: self.total_countries_visited,
+            # countries_visited_names: self.countries
             total_stays: self.count_of_stays,
             day_trips: self.count_of_day_trips,
             full_trips: self.count_of_full_trips,
