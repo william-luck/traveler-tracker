@@ -33,30 +33,30 @@ class Traveler < ActiveRecord::Base
 
     def tally_day_full_trips
         tallied = self.countries.tally
-        day_trips = []
-        full_trips = []
-        tallied.each do |tally_total|
-            tally_total.each do |k, v|
-                if v != 1
-                    full_trips << k
-                elsif v == 1
-                    day_trips << k
-                end
-            end
-        end
+        day_trips = tallied.select{|k,v| v == 1}
+        full_trips = tallied.select{|k,v| v > 1}
+        # tallied.each do |tally_total|
+        #     tally_total.each do |k, v|
+        #         if v != 1
+        #             full_trips << k
+        #         elsif v == 1
+        #             day_trips << k
+        #         end
+        #     end
+        # end
         day_and_full_tally = {
-            'day_trips' => day_trips.count,
-            'full_trips' => full_trips.count / 2
+            day_trips: day_trips.count,
+            full_trips: full_trips.count
         }
         day_and_full_tally
     end
 
     def count_of_day_trips
-        self.tally_day_full_trips['day_trips']
+        self.tally_day_full_trips[:day_trips]
     end
 
     def count_of_full_trips
-        self.tally_day_full_trips['full_trips']
+        self.tally_day_full_trips[:full_trips]
     end
 
     def average_stays_per_country
@@ -95,7 +95,9 @@ class Traveler < ActiveRecord::Base
             name: self.traveler_name,
             passport: self.passport_number,
             total_countries: self.total_countries_visited,
-            # countries_visited_names: self.countries
+            countries_visited_names: self.country_visit_names,
+            total_continents: self.continent_visit_names.count,
+            continent_visit_names: self.continent_visit_names,
             total_stays: self.count_of_stays,
             day_trips: self.count_of_day_trips,
             full_trips: self.count_of_full_trips,
