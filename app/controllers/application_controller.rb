@@ -33,6 +33,16 @@ class ApplicationController < Sinatra::Base
     statistics.to_json
   end
 
+  patch '/traveler_name/:id' do
+    traveler = Traveler.find(params[:id])
+    traveler.update(
+      traveler_name: params[:traveler_name]
+    )
+    traveler.to_json
+  end
+
+
+
   # get '/travelers' do
   #   countries =
 
