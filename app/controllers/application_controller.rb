@@ -23,9 +23,9 @@ class ApplicationController < Sinatra::Base
     country.to_json
   end
 
-  get 'deleted_traveler_country/:id' do
+  get '/deleted_traveler_country/:id' do
     traveler = Traveler.find(params[:id])
-    traveler.current_country
+    traveler.current_country.to_json
   end
 
   get '/traveler_count' do
@@ -58,6 +58,20 @@ class ApplicationController < Sinatra::Base
     traveler = Traveler.find(params[:id])
     traveler.destroy
     traveler.to_json
+  end
+
+  post '/add_traveler' do
+    # Finding the matching country by enetered nationality (user will not know the country id)
+    country = Country.find_by(country_name: params[:nationality])
+
+    traveler = Traveler.create(
+      traveler_name: params[:traveler_name],
+      passport_number: params[:passport_number],
+      from_country_id: country.id
+    )
+
+    traveler.to_json
+
   end
 
   
