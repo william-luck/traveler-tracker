@@ -4,15 +4,17 @@ class Traveler < ActiveRecord::Base
     has_many :visits
     has_many :countries, through: :visits
 
-    # Don't need nationality name
-    # Don't need passport number
-
     def total_countries_visited
         self.countries.uniq.count
     end
 
     def current_country
         self.countries.last
+    end
+
+    def nationality
+        nationality = Country.find(self.from_country_id)
+        nationality.country_name
     end
 
     def country_visit_names
@@ -88,6 +90,7 @@ class Traveler < ActiveRecord::Base
     def traveler_statistics
         info = {
             name: self.traveler_name,
+            nationality: self.nationality,
             passport: self.passport_number,
             current_country: self.current_country.country_name,
             total_countries: self.total_countries_visited,
