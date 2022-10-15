@@ -23,6 +23,11 @@ class ApplicationController < Sinatra::Base
     country.to_json
   end
 
+  get 'deleted_traveler_country/:id' do
+    traveler = Traveler.find(params[:id])
+    traveler.current_country
+  end
+
   get '/traveler_count' do
     Country.travelers_in_country_array.to_json
   end
@@ -49,7 +54,7 @@ class ApplicationController < Sinatra::Base
     traveler.to_json
   end
 
-  delete 'traveler/:id' do
+  delete '/traveler_delete/:id' do
     traveler = Traveler.find(params[:id])
     traveler.destroy
     traveler.to_json
