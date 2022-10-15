@@ -11,6 +11,10 @@ class Traveler < ActiveRecord::Base
         self.countries.uniq.count
     end
 
+    def current_country
+        self.countries.last
+    end
+
     def country_visit_names
         names = []
         self.countries.uniq.each do |country| 
@@ -35,15 +39,6 @@ class Traveler < ActiveRecord::Base
         tallied = self.countries.tally
         day_trips = tallied.select{|k,v| v == 1}
         full_trips = tallied.select{|k,v| v > 1}
-        # tallied.each do |tally_total|
-        #     tally_total.each do |k, v|
-        #         if v != 1
-        #             full_trips << k
-        #         elsif v == 1
-        #             day_trips << k
-        #         end
-        #     end
-        # end
         day_and_full_tally = {
             day_trips: day_trips.count,
             full_trips: full_trips.count
@@ -94,6 +89,7 @@ class Traveler < ActiveRecord::Base
         info = {
             name: self.traveler_name,
             passport: self.passport_number,
+            current_country: self.current_country.country_name,
             total_countries: self.total_countries_visited,
             countries_visited_names: self.country_visit_names,
             total_continents: self.continent_visit_names.count,
@@ -104,7 +100,7 @@ class Traveler < ActiveRecord::Base
             average_stays: self.average_stays_per_country,
             longest_visit: self.longest_time_in_country_in_days,
             longest_visited_countries: self.countries_with_longest_days,
-            shortest_vist: self.shortest_time_in_country_in_days,
+            shortest_visit: self.shortest_time_in_country_in_days,
             shortest_visited_countries: self.countries_with_shortest_days
         }
     end
