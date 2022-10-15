@@ -41,6 +41,16 @@ class ApplicationController < Sinatra::Base
     traveler.to_json
   end
 
+  patch '/traveler_passport/:id' do
+    traveler = Traveler.find(params[:id])
+    traveler.update(
+      passport_number: params[:traveler_name]
+    )
+    traveler.to_json
+  end
+
+  
+
 
 
   # get '/travelers' do
