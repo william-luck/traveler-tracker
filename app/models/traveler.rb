@@ -84,7 +84,9 @@ class Traveler < ActiveRecord::Base
             full_trips: self.count_of_full_trips,
             average_stays: self.average_stays_per_country,
             longest_visit: self.longest_time_in_country_in_days,
-            longest_visited_countries: self.countries_with_longest_days
+            longest_visited_countries: self.countries_with_longest_days,
+            shortest_vist: self.shortest_time_in_country_in_days,
+            shortest_visited_countries: self.countries_with_shortest_days
         }
     end
 

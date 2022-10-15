@@ -35,6 +35,12 @@ class ApplicationController < Sinatra::Base
     Country.travelers_in_country_array.to_json
   end
 
+  get '/traveler_statistics/:id' do
+    traveler = Traveler.find(params[:id])
+    statistics = traveler.traveler_statistics
+    statistics.to_json
+  end
+
   # get '/travelers' do
   #   countries =
 
