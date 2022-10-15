@@ -19,6 +19,14 @@ class Traveler < ActiveRecord::Base
         names
     end
 
+    def continent_visit_names
+        continents = []
+        self.countries.uniq.each do |country|
+            continents << country.continent
+        end
+        continents.uniq
+    end
+
     def count_of_stays
         self.visits.count
     end
