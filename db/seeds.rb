@@ -1249,7 +1249,7 @@ end
 500.times do 
     traveler = Traveler.create(
         traveler_name: Faker::Name.name,
-        passport_number: "#{rand(100..999)}-#{rand(100..999)}-#{rand(100..999)}" ,
+        passport_number: "#{rand(100..999)}#{rand(100..999)}#{rand(100..999)}" ,
         # random number between 1 and 244
         from_country_id: rand(1..244)
     )
