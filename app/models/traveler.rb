@@ -48,15 +48,31 @@ class Traveler < ActiveRecord::Base
         ((tallied.values.reduce(:+).to_f)/(tallied.length)).round
     end
 
+    def longest_time_in_country_in_days
+        tallied_sorted = self.countries.tally.sort_by(&:last)
+        # Gets the number of days of the longest country visit
+        tallied_sorted.last[-1]
+        
+    end
+
+    def countries_with_longest_days
+        longest_days = self.longest_time_in_country_in_days
+        # Gets the instances of countries with the longest amount of days
+        self.countries.tally.sort_by(&:last).select {|k,v| v == longest_days}
+    end
+
     def traveler_statistics
         info = {
             name: self.traveler_name,
             passport: self.passport_number,
-            total_countries: total_countries_visited,
-            total_stays: count_of_stays,
-            day_trips: count_of_day_trips,
-            full_trips: count_of_full_trips,
-            average_stays: average_stays_per_country
+            total_countries: self.total_countries_visited,
+            total_stays: self.count_of_stays,
+            day_trips: self.count_of_day_trips,
+            full_trips: self.count_of_full_trips,
+            average_stays: self.average_stays_per_country
+            longest_visit: self.longest_time_in_country_in_days,
+            longest_visited_countries: self.countries_with_longest_days,
+            
         }
     end
 
