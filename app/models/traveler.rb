@@ -48,5 +48,19 @@ class Traveler < ActiveRecord::Base
         ((tallied.values.reduce(:+).to_f)/(tallied.length)).round
     end
 
+    def traveler_statistics
+        info = {
+            name: self.traveler_name,
+            passport: self.passport_number,
+            total_countries: total_countries_visited,
+            total_stays: count_of_stays,
+            day_trips: count_of_day_trips,
+            full_trips: count_of_full_trips,
+            average_stays: average_stays_per_country
+        }
+    end
+
+
+
 
 end
