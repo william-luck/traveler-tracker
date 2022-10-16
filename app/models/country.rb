@@ -12,9 +12,7 @@ class Country < ActiveRecord::Base
         all_travelers = self.travelers
         # This gets all the list of travelers... could we then go through the array, check their visits, and if their last visit matches the current country, push to new array of travelers 
         all_travelers.each do |traveler|
-            # Check their total countries
-            total_countries = traveler.countries
-            current_country = total_countries.last
+            current_country = traveler.countries[-1]
             if current_country.id == self.id
                 travelers_in_country << traveler
             end
@@ -36,6 +34,17 @@ class Country < ActiveRecord::Base
 
     # def first_one
     #     self.all.first
+    # end
+
+    # def self.message
+    #     travelers_in_each = {
+
+    #     }
+    #     travelers = Traveler.all
+    #     travelers.each do |traveler|
+            
+    #     end
+
     # end
 
 end

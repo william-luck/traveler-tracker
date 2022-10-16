@@ -76,7 +76,7 @@ class ApplicationController < Sinatra::Base
 
   end
 
-  post '/add_visit/' do
+  post '/add_visit' do
 
     country = Country.find_by(country_name: params[:country_name])
     traveler = Traveler.find_by(passport_number: params[:passport_number])
@@ -96,7 +96,7 @@ class ApplicationController < Sinatra::Base
 
   get '/lookup_traveler/:passport_number' do
     traveler = Traveler.find_by(passport_number: params[:passport_number])
-    traveler.to_json
+    traveler.traveler_statistics.to_json
   end
 
   # t.integer "country_id"
