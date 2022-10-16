@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
@@ -73,6 +75,31 @@ class ApplicationController < Sinatra::Base
     traveler.to_json
 
   end
+
+  post '/add_visit' do
+
+    country = Country.find_by(country_name: params[:country_name])
+    traveler = Traveler.find_by(passport_number: params[:passport_number])
+
+    visit = Visit.create(
+      country_id: country.id,
+      traveler_id: traveler.id,
+      accomodation_name: params[:accomodation_name],
+      accomodation_type: params[:accomodation_type],
+      address: "#{params[:address]}, #{params[:city]}",
+      cost_per_night: params[:cost_per_night]
+    )
+
+    visit.to_json
+
+  end
+
+  # t.integer "country_id"
+  #   t.integer "traveler_id"
+  #   t.string "accomodation_name"
+  #   t.string "accomodation_type"
+  #   t.string "address"
+  #   t.integer "cost_per_night"
 
   
 
