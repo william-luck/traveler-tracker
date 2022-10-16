@@ -9,7 +9,7 @@ class Traveler < ActiveRecord::Base
     end
 
     def current_country
-        self.countries.last
+        self.countries[-1]
     end
 
     def nationality
