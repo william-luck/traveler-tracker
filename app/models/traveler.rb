@@ -93,6 +93,7 @@ class Traveler < ActiveRecord::Base
             nationality: self.nationality,
             passport: self.passport_number,
             current_country: self.current_country.country_name,
+            current_country_id: self.current_country.id,
             total_countries: self.total_countries_visited,
             countries_visited_names: self.country_visit_names,
             total_continents: self.continent_visit_names.count,

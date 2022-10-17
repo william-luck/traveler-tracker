@@ -32,6 +32,12 @@ class Country < ActiveRecord::Base
         number_array
     end
 
+    
+        
+    
+
+
+
     # def first_one
     #     self.all.first
     # end
