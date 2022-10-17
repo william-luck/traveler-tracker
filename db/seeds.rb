@@ -1244,13 +1244,12 @@ puts "🌱 Seeding spices..."
     )
 end
 
-# After some random visit, create a series of visits, ensuring that each traveler has between 3 and 7 visits in five countries.
+# After some random visits, create a series of visits, ensuring that each traveler has between 3 and 7 visits in five countries.
 
 500.times do 
     traveler = Traveler.create(
         traveler_name: Faker::Name.name,
         passport_number: "#{rand(100..999)}#{rand(100..999)}#{rand(100..999)}" ,
-        # random number between 1 and 244
         from_country_id: rand(1..244)
     )
 

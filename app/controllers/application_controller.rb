@@ -3,8 +3,6 @@ require 'pry'
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-  # Add your routes here
-  
   get '/countries' do
     countries = Country.all
     countries.to_json
@@ -63,7 +61,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/add_traveler' do
-    # Finding the matching country by enetered nationality (user will not know the country id)
+  
     country = Country.find_by(country_name: params[:nationality])
 
     traveler = Traveler.create(
@@ -98,23 +96,5 @@ class ApplicationController < Sinatra::Base
     traveler = Traveler.find_by(passport_number: params[:passport_number])
     traveler.traveler_statistics.to_json
   end
-
-  # t.integer "country_id"
-  #   t.integer "traveler_id"
-  #   t.string "accomodation_name"
-  #   t.string "accomodation_type"
-  #   t.string "address"
-  #   t.integer "cost_per_night"
-
-  
-
-
-
-  # get '/travelers' do
-  #   countries =
-
-  # Traveler.countries.last is the country that they are currently in. Get that ID. 
-  # Once we have the country ID, display the visits from the latest country. 
-    
 
 end
