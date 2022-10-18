@@ -1,6 +1,7 @@
 require 'pry'
 
 class Traveler < ActiveRecord::Base 
+
     has_many :visits
     has_many :countries, through: :visits
 
@@ -86,7 +87,6 @@ class Traveler < ActiveRecord::Base
         self.countries.tally.sort_by(&:last).select {|k,v| v == shortest_days}
     end
 
-
     def traveler_statistics
         info = {
             name: self.traveler_name,
@@ -107,6 +107,12 @@ class Traveler < ActiveRecord::Base
             shortest_visit: self.shortest_time_in_country_in_days,
             shortest_visited_countries: self.countries_with_shortest_days
         }
+    end
+
+    def edit_passport_number(params)
+        self.update(
+            traveler_name: params[:traveler_name]
+        )
     end
 
 

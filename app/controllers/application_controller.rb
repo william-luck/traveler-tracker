@@ -40,10 +40,11 @@ class ApplicationController < Sinatra::Base
 
   patch '/traveler_name/:id' do
     traveler = Traveler.find(params[:id])
-    traveler.update(
-      traveler_name: params[:traveler_name]
-    )
-    traveler.to_json
+    traveler.edit_passport_number(params).to_json
+    # traveler.update(
+    #   traveler_name: params[:traveler_name]
+    # )
+    # traveler.to_json
   end
 
   patch '/traveler_passport/:id' do
@@ -61,6 +62,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/add_traveler' do
+
   
     country = Country.find_by(country_name: params[:nationality])
 
