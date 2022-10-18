@@ -109,10 +109,28 @@ class Traveler < ActiveRecord::Base
         }
     end
 
-    def edit_passport_number(params)
+    def edit_name(params)
         self.update(
             traveler_name: params[:traveler_name]
         )
+    end
+
+    def edit_passport_number(params)
+        self.update(
+            passport_number: params[:passport_number]
+        )
+    end
+
+    def self.add_traveler(params, nationality)
+        Traveler.create(
+            traveler_name: params[:traveler_name],
+            passport_number: params[:passport_number],
+            from_country_id: nationality
+        )
+    end
+
+    def delete_traveler
+        self.destroy
     end
 
 
