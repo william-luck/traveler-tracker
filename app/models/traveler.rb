@@ -133,6 +133,13 @@ class Traveler < ActiveRecord::Base
         self.destroy
     end
 
+    # Instance method of traveler, first get the list of all the visits
+    def filter_visits_by_country(country_id)
+        self.visits.select do |visit|
+            visit[:country_id] == country_id
+        end
+    end
+
 
 
 end
