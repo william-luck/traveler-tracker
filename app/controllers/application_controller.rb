@@ -29,19 +29,13 @@ class ApplicationController < Sinatra::Base
   end
 
   # Could I do this just with travler/:id as above, except patch?
-  patch '/traveler_name/:id' do
+  patch '/traveler/:id' do
     traveler = Traveler.find(params[:id])
     traveler.edit_name(params).to_json
-  end
-
-  # Combine these two but just have different form data sent by the front end? As Nancy said? 
-  patch '/traveler_passport/:id' do
-    traveler = Traveler.find(params[:id])
     traveler.edit_passport_number(params).to_json
   end
 
   # delete traveler/:id
-
   delete '/traveler_delete/:id' do
     traveler = Traveler.find(params[:id])
     traveler.delete_traveler.to_json
