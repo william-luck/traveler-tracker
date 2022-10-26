@@ -29,25 +29,5 @@ class Country < ActiveRecord::Base
         number_array
     end
 
-    
-        
-    
-
-
-
-    # def first_one
-    #     self.all.first
-    # end
-
-    # def self.message
-    #     travelers_in_each = {
-
-    #     }
-    #     travelers = Traveler.all
-    #     travelers.each do |traveler|
-            
-    #     end
-
-    # end
 
 end
