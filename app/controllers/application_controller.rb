@@ -9,9 +9,10 @@ class ApplicationController < Sinatra::Base
     countries.to_json(include: :travelers_currently_in_country)
   end
 
+  # Good
   get '/countries/:id' do
     country = Country.find(params[:id])
-    country.to_json(include: { travelers_currently_in_country: {include: :visits} })
+    country.to_json(include: { travelers_currently_in_country: {include: :visits }})
   end
 
   # Good
@@ -20,26 +21,8 @@ class ApplicationController < Sinatra::Base
     selected_traveler.visits.to_json
   end
 
-  # Probably don't need this one
-  get '/findcountryname/:id' do
-    country = Country.find(params[:id])
-    country.to_json
-  end
-
-  # Don't need this one either, can find it from the response from delete
-  get '/deleted_traveler_country/:id' do
-    traveler = Traveler.find(params[:id])
-    traveler.current_country.to_json
-  end
-
-  # Can combine this with nested JSON
-  get '/traveler_count' do
-    Country.travelers_in_country_array.to_json
-  end
-
-
-  # Could I refactor this as just traveler/:id
-  get '/traveler_statistics/:id' do
+  # Good
+  get '/traveler/:id' do
     traveler = Traveler.find(params[:id])
     statistics = traveler.traveler_statistics
     statistics.to_json
