@@ -12,14 +12,14 @@ class ApplicationController < Sinatra::Base
   # Good
   get '/countries/:id' do
     country = Country.find(params[:id])
-    country.to_json(include: { travelers_currently_in_country: {include: :visits }})
+    country.to_json(include: { travelers_currently_in_country: {include: :visits_of_current_country }})
   end
 
-  # Good
-  get '/visits/:id' do
-    selected_traveler = Traveler.find(params[:id])
-    selected_traveler.visits.to_json
-  end
+  # # Good
+  # get '/visits/:id' do
+  #   selected_traveler = Traveler.find(params[:id])
+  #   selected_traveler.visits.to_json
+  # end
 
   # Good
   get '/traveler/:id' do
@@ -28,7 +28,7 @@ class ApplicationController < Sinatra::Base
     statistics.to_json
   end
 
-  # Could I do this just with travler/:id as above, except patch?
+  # Good
   patch '/traveler/:id' do
     traveler = Traveler.find(params[:id])
     traveler.edit_name(params).to_json

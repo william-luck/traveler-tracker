@@ -140,6 +140,13 @@ class Traveler < ActiveRecord::Base
         end
     end
 
+    def visits_of_current_country
+        country_id = self.visits.last.country_id
+        self.visits.select do |visit|
+            visit[:country_id] == country_id
+        end
+    end
+
 
 
 end
