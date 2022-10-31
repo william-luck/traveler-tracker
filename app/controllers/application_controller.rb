@@ -19,8 +19,7 @@ class ApplicationController < Sinatra::Base
     else
       traveler = Traveler.find_by(passport_number: params[:id])
     end
-    statistics = traveler.traveler_statistics
-    statistics.to_json
+    traveler.to_json(include: :countries, methods: :nationality)
   end
 
   patch '/traveler/:id' do
