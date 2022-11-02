@@ -3,7 +3,10 @@
 ## Installation
 To start this application, fork and clone this repo as well as the above front-end repo.
 
- In this back end repo, begin by typing `bundle install` in the console. Then seed the database with `db:seed`, and then start the server by typing `rake server`. 
+ In this back end repo, begin by typing `bundle install` in the console. Then input the following commands in the console: 
+ * `rake db:migrate`
+ * `rake db:seed`
+ * `rake server`
 
 After the server is running, in the front end repo, type `npm install` and `npm start` in the console to start the application. 
 
